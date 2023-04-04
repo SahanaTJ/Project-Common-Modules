@@ -65,13 +65,13 @@ public class AjaxController {
 		}
 	}
 
-	@GetMapping(value = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
-	public SignUpDTO signUpDTO() {
-		SignUpDTO dto =new SignUpDTO();
-		dto.setUserId("sahana1234");
-		dto.setEmail("sahana@gmail.com");
-		dto.setMobile(8965236541L);
-		System.out.println(dto);
-		return dto;
-	}
+//	@GetMapping(value = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public SignUpDTO signUpDTO() {
+//		SignUpDTO dto =new SignUpDTO();
+//		dto.setUserId("sahana1234");
+//		dto.setEmail("sahana@gmail.com");
+//		dto.setMobile(8965236541L);
+//		System.out.println(dto);
+//		return dto;
+//	}
 }

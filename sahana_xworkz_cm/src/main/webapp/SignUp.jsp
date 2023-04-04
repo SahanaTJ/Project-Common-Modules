@@ -31,67 +31,74 @@
 	<h5 style="color: red;">${messag}<br>
 		<c:forEach items="${errors}" var="e">${e.message}</c:forEach>
 	</h5>
-		<form action="register" method="post" style="border: 1px solid #ccc">
-			<div class="container" style="text-align: center;">
-			
-					<h1>Welcome To Sign Up</h1>
-	
-					
-		        	User Id	<input type="text" name="userId" value="${dto.userId}" id="userName"
-							onchange="ValideName()"> 
-							<span id="nameError" style="color: red"></span>
-							<h5 style="color: red"></h5><br>
-					     <span id="displayUserName" ></span>
-					
-					Email  <input type="email" name="email" id="emailId" value="${dto.email}"
-							onchange="valideEmail()"> <span id="emailError"
-							style="color: red"></span>
-							<h5 style="color: red">${emailIdExsist}</h5><br>
-					
-					
-		    Mobile Number  <input type="number" name="mobile" id="userMobile" value="${dto.mobile}"
-							onchange="ValideMobile()"> <span id="mobileError"
-							style="color: red"></span>
-							<h5 style="color: red">${mobileNumberExsist}</h5><br>
-				
-				
-			    Password   <input type="password" name="password" id="userPassword" value="${dto.password}"
-							onchange="ValidePassword()">
-							 <span id="passwordError" style="color: red"></span> <div>
-							<input type="checkbox"
-							onclick="myFunction()">
-						  Show Password <br></div>
-					
-					
-	      Confirm Password   <input type="password" name="confirmPassword"
-							id="userConfirmPassword" onchange="ValidePassword()"> <span
-							id="passwordCompare" style="color: red"></span> <br>
-						
-							
-		Accept Agreement   <input type="checkbox" name="agreement"
-							id="agreementConfirm" onclick="onconfirm()"> <br>
-					
-					
-					<input type="submit" value="SignUp" class="btn btn-primary"/>
-					
+	<
+	<form action="register" method="Post" style="border: 1px solid #ccc">
+		<div class="container" style="text-align: center;">
+
+			<h1>Welcome To Sign Up</h1>
+			<table>
+				<tr>
+					<td>User ID</td>
+
+					<td><input type="text" name="userId" id="userName"
+						onchange="ValideName()"> <span id="nameError"
+						style="color: red"></span> <span id="displayUserName"
+						style="color: red"></span></td>
+				</tr>
+
+				<tr>
+					<td>Email</td>
+					<td><input type="email" name="email" id="emailId"
+						onchange="valideEmail()"> <span id="emailError"
+						style="color: red"></span> <span id="display" style="color: red"></span></td>
+				</tr>
+				<tr>
+					<td>Mobile Number</td>
+					<td><input type="number" name="mobile" id="userMobile"
+						onchange="ValideMobile()"> <span id="mobileError"
+						style="color: red"></span> <span id="displayUserMobile"
+						style="color: red"></span></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="password" id="userPassword">
+						<span id="passwordError" style="color: red"></span> <input
+						type="checkbox" onclick="myFunction1()">Show Password</td>
+				</tr>
+				<tr>
+					<td>ConfirmPassword</td>
+					<td><input type="password" name="confirmPassword"
+						id="userConfirmPassword" onblur="ValidePassword()"> <span
+						id="passwordCompare" style="color: red"></span> <input
+						type="checkbox" onclick="myFunction2()">Show Confirm
+						Password</td>
+				</tr>
+
+				<tr>
+					<td>Accepect Agreement <input type="checkbox" name="agreement"
+						id="agreementConfirm" onclick="ValideName()"></td>
+				</tr>
+			</table>
+			<div>
+				<button type="submit" class="btn btn-primary">SignUp</button>
 			</div>
-		</form>
+	</form>
 	<h4 style="color: red;">${password}</h4>
-	
+
 	<script>
-	function DisplayDTO() {
-		console.log('Running in DisplayDTO');
-		const xhttp = new XMLHttpRequest();
-		xhttp.open("GET", "http://localhost:8080/sahana_xworkz_cm/dto");
-		xhttp.send();
-		xhttp.onload = function() {
-			console.log(this);
-			document.getElementById("showDTO").innerHTML = this.responseText
-			var	json=JSON.parse(this.responseText);
-			// document.getElementById("showDTO").innerHTML=json.email;
-			 
+		function DisplayDTO() {
+			console.log('Running in DisplayDTO');
+			const xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "http://localhost:8080/sahana_xworkz_cm/dto");
+			xhttp.send();
+			xhttp.onload = function() {
+				console.log(this);
+				document.getElementById("showDTO").innerHTML = this.responseText
+				var json = JSON.parse(this.responseText);
+				// document.getElementById("showDTO").innerHTML=json.email;
+
+			}
 		}
-	}
 		function myFunction() {
 			var x = document.getElementById("userPassword");
 			if (x.type === "password") {
@@ -100,7 +107,7 @@
 				x.type = "password";
 			}
 		}
-	
+
 		function ValideName() {
 			var user = document.getElementById('userName');
 			var uservalue = user.value;
@@ -122,8 +129,9 @@
 			const xhttp = new XMLHttpRequest();
 			console.log('Running in ajax');
 			console.log(uservalue);
-			xhttp.open("GET", "http://localhost:8080/sahana_xworkz_cm/userName/"
-					+ uservalue);
+			xhttp.open("GET",
+					"http://localhost:8080/sahana_xworkz_cm/userName/"
+							+ uservalue);
 			xhttp.send();
 			xhttp.onload = function() {
 				console.log(this);

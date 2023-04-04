@@ -25,48 +25,47 @@ public class SignUpController {
 		public SignUpController() {
 		log.info("Created" + this.getClass().getSimpleName());
 	}
-
-	@GetMapping("/register")
-	public String onSave() {
-		log.info("GetMapping onSave in SignUpController");
-		return "SignUp";
-	}
+		@GetMapping("/register")
+		public String onSave(Model model) {
+			log.info("GetMapping onSave in SignUpController");
+			return "SignUp";
+		}
+	
 
 	@PostMapping("/register")
 	public String OnSave(SignUpDTO dto, Model model) {
-		log.info("PostMapping onSave in SignUpController" + dto);
-		dto.setCreatedBy(dto.getUserId());
-		dto.setCreatedDate(LocalDateTime.now());
-		if (dto != null) {
+
 			Set<ConstraintViolation<SignUpDTO>> violations = this.service.validateAndSave(dto);
-			if (violations.isEmpty()) {
-				System.out.println("no violations found, go to success page");
+			if (violations!=null && violations.isEmpty()) {
+				
+				model.addAttribute("message", "data saved successfull");
+				System.out.println("" +dto);
 				model.addAttribute("dto", dto);
 				return "SignUpSuccessPage";
+			} else {
+				model.addAttribute("errors", violations);
+				model.addAttribute("message", "data not saved");
 			}
-
-			log.info("Violations found " + dto);
-			model.addAttribute("errors", violations);
-			model.addAttribute("dto", dto);
-		}
 		return "SignUp";
 	}
 	
 	@PostMapping("/login")
-	public String onSave(String signInId, String password, Model model) {
+	public String signIn(String userId, String password, Model model) {
 		try {
-	SignUpDTO dto = this.service.signIn(signInId, password);
+	SignUpDTO dto = this.service.signIn(userId, password);
 		if (dto!=null) {
 			log.info("User ID and password is matched");
-			model.addAttribute("userID",dto.getUserId());
+			model.addAttribute("userId",dto.getUserId());
 			return "LoginSuccess";
-		}
+		}		
+		
 		}
 		catch (Exception e) {
-			
+
 		}
-			model.addAttribute("Match", "UserID OR Password is not matching");
-			return "SignIn";			
+
+		model.addAttribute("match", "UserID OR Password is not matching");
+		return "SignIn";
 			
 	}
 }

@@ -27,5 +27,4 @@ default Long findByMobile(Long number) {
 	return null;
 }
 
-SignUpEntity entity(String userId, String password);
 }

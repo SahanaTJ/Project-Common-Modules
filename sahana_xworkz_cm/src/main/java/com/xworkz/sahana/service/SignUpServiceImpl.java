@@ -84,8 +84,8 @@ public class SignUpServiceImpl implements SignUpService {
 	
 	@Override
 	public SignUpDTO signIn(String userId, String password) {
-		SignUpEntity entity = this.repository.entity(userId, password);
-	   SignUpDTO dto = new SignUpDTO();
+		SignUpEntity entity = this.repository.signIn(userId, password);
+				SignUpDTO dto = new SignUpDTO();
 		dto.setUserId(entity.getUserId());
 		dto.setPassword(entity.getPassword());
 		if (dto.getUserId().equals(userId) && dto.getPassword().equals(password)) {
@@ -114,22 +114,22 @@ public class SignUpServiceImpl implements SignUpService {
 	}
 
 	@Override
-	public Long findByMobile(Long mobile) {
-		Long mobilecount = this.repository.findByMobile(mobile);
+	public Long findByMobile(Long number) {
+		Long mobilecount = this.repository.findByMobile(number);
 		return mobilecount;
 	}
 
 	@Override
 	public Long findByUser(String user) {
-		Long userCount = this.repository.findByUser(user);
-		return userCount;
+		Long usercount = this.repository.findByUser(user);
+		return usercount;
 	}
 
 	@Override
 	public boolean sendMail(String email) {
 		String portNumber = "587";  // 485,587,25
 		String hostName = "smtp.office365.com";
-		String fromEmail = "sahanatj10@gmail.com";
+		String fromEmail = "sahanatj106@outlook.com";
 		String password = "sahana10";
 		String to = email;
 

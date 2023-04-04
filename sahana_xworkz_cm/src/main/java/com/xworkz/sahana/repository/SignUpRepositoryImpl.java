@@ -24,15 +24,18 @@ public class SignUpRepositoryImpl implements SignUpRepository{
 	@Override
 	public boolean save(SignUpEntity entity) {
 		log.info("Running save in repoImpl " + entity);
-		entity.setCreatedBy(entity.getUserId());
-		entity.setCreatedDate(LocalDateTime.now());
 		EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		EntityTransaction transaction = entityManager.getTransaction();
-		transaction.begin();
-		entityManager.persist(entity); 
-		transaction.commit();
-		entityManager.close();
-		return true;
+		try {
+			EntityTransaction transaction = entityManager.getTransaction();
+			
+			transaction.begin();
+			entityManager.persist(entity); 
+			transaction.commit();
+			entityManager.close();
+			return true;
+		} finally {
+			entityManager.close();
+		}
 	}
 	
 	@Override
@@ -113,10 +116,7 @@ public class SignUpRepositoryImpl implements SignUpRepository{
 		}
 	}
 
-	@Override
-	public SignUpEntity entity(String userId, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
 }
 
