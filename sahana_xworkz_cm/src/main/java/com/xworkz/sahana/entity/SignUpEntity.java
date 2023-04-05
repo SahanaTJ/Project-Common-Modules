@@ -3,14 +3,15 @@ package com.xworkz.sahana.entity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.NamedQueries;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.NamedQuery;
-
-import com.xworkz.sahana.dto.AbstractAuditDTO;
 import lombok.Data;
+
 
 @Data
 @Entity
@@ -19,10 +20,12 @@ import lombok.Data;
 @NamedQuery(name = "userId",query = "select count(*) from  SignUpEntity ent where ent.userId=:userBy")
 @NamedQuery(name = "emailId",query = "select count(*) from  SignUpEntity ent where ent.email=:emailBy")
 @NamedQuery(name = "mobileId",query = "select count(*) from  SignUpEntity ent where ent.mobile=:mobileBy")
-@NamedQuery(name="userANDpassword",query = "select ent from SignUpEntity ent where ent.userId=:ui and ent.password=:pwd ")
-public class SignUpEntity{
+@NamedQuery(name = "userANDpassword",query = "select ent from SignUpEntity ent where ent.userId=:ui")
+@NamedQuery(name = "updateLoginCount",query = "update SignUpEntity ent set ent.loginCount=:count where ent.userId=:userId")
+public class SignUpEntity extends AbstractAuditEntity{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
@@ -50,4 +53,6 @@ public class SignUpEntity{
 	@Column(name ="updatedDate")
 	private LocalDateTime updatedDate;
 	
+	@Column(name ="logincount")
+	private int loginCount;
 }

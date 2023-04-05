@@ -1,16 +1,16 @@
-package com.xworkz.sahana.dto;
+package com.xworkz.sahana.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
-
 import lombok.Data;
 
+@MappedSuperclass
 @Data
-public class AbstractAuditDTO implements Serializable{
+public class AbstractAuditEntity implements Serializable{
 
 	@Column(name ="createdBy")
 	private String createdBy;

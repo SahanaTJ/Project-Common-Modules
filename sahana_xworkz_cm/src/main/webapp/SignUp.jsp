@@ -15,6 +15,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 	crossorigin="anonymous"></script>
+	
 </head>
 <body>
 
@@ -31,58 +32,66 @@
 	<h5 style="color: red;">${messag}<br>
 		<c:forEach items="${errors}" var="e">${e.message}</c:forEach>
 	</h5>
-	<
-	<form action="register" method="Post" style="border: 1px solid #ccc">
-		<div class="container" style="text-align: center;">
-
+	
+	<form action="register" method="post"  class="container col-15 col-sm-8 col-md-5 shadow-lg p-6 mb-6 bg-white mx-auto d-block border border-primary rounded-lg 
+         m-7 pb-7 bg-info" >
 			<h1>Welcome To Sign Up</h1>
 			<table>
 				<tr>
+
 					<td>User ID</td>
 
 					<td><input type="text" name="userId" id="userName"
-						onchange="ValideName()"> <span id="nameError"
+						onchange="ValideName()" class="form-outline mb-4"> <span id="nameError"
 						style="color: red"></span> <span id="displayUserName"
 						style="color: red"></span></td>
 				</tr>
 
 				<tr>
 					<td>Email</td>
-					<td><input type="email" name="email" id="emailId"
+					<td><input class="form-outline mb-4" type="email" name="email" id="emailId"
 						onchange="valideEmail()"> <span id="emailError"
 						style="color: red"></span> <span id="display" style="color: red"></span></td>
 				</tr>
 				<tr>
 					<td>Mobile Number</td>
-					<td><input type="number" name="mobile" id="userMobile"
+					<td><input class="form-outline mb-4" type="number" name="mobile" id="userMobile"
 						onchange="ValideMobile()"> <span id="mobileError"
 						style="color: red"></span> <span id="displayUserMobile"
 						style="color: red"></span></td>
 				</tr>
+				
 				<tr>
 					<td>Password</td>
-					<td><input type="password" name="password" id="userPassword">
-						<span id="passwordError" style="color: red"></span> <input
-						type="checkbox" onclick="myFunction1()">Show Password</td>
+					<td><input type="password" name="password" id="userPassword"
+						onblur="ValidePassword()"> <span id="passwordError"
+						style="color: red"></span> <input type="checkbox"
+						onclick="myFunction()">Show Password</td>
 				</tr>
+				
+				
 				<tr>
-					<td>ConfirmPassword</td>
-					<td><input type="password" name="confirmPassword"
+					<td>Confirm Password</td>
+					<td><input class="form-outline mb-4" type="password" name="confirmPassword"
 						id="userConfirmPassword" onblur="ValidePassword()"> <span
 						id="passwordCompare" style="color: red"></span> <input
 						type="checkbox" onclick="myFunction2()">Show Confirm
-						Password</td>
+						Password</td> 
 				</tr>
+				
 
 				<tr>
-					<td>Accepect Agreement <input type="checkbox" name="agreement"
+					<td>Accept Agreement <input type="checkbox" name="agreement"
 						id="agreementConfirm" onclick="ValideName()"></td>
 				</tr>
 			</table>
 			<div>
 				<button type="submit" class="btn btn-primary">SignUp</button>
 			</div>
+			</div>
+			
 	</form>
+	
 	<h4 style="color: red;">${password}</h4>
 
 	<script>
@@ -209,6 +218,10 @@
 			}
 		}
 	</script>
+	</div>
+	</div>
+	</section>
+	
 </body>
 </html>
 

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -55,5 +57,11 @@ public class SignUpConfiguration {
 		dataSource.setPassword("Xworkzodc@123");
 		dataSource.setUsername("root");
 		return dataSource;
+	}
+	
+	@Bean
+	public PasswordEncoder encoder() {
+		log.info("Registring the PasswordEncoder");
+		return new BCryptPasswordEncoder();
 	}
 }

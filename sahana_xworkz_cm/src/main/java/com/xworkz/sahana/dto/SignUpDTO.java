@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class SignUpDTO extends AbstractAuditDTO{
+public class SignUpDTO {
 
 	private int id;
 	@NotBlank

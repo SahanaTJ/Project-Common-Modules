@@ -20,6 +20,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.xworkz.sahana.dto.SignUpDTO;
 import com.xworkz.sahana.entity.SignUpEntity;
@@ -32,6 +33,9 @@ public class SignUpServiceImpl implements SignUpService {
 
 	@Autowired
 	private SignUpRepository repository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	private Set<ConstraintViolation<SignUpDTO>> validate(SignUpDTO signUpDto) {
 		ValidatorFactory validationFactory = Validation.buildDefaultValidatorFactory();
@@ -66,7 +70,11 @@ public class SignUpServiceImpl implements SignUpService {
 					SignUpEntity entity = new SignUpEntity();
 					entity.setCreatedBy(signUpDTO.getUserId());
 					entity.setCreatedDate(LocalDateTime.now());
-					BeanUtils.copyProperties(signUpDTO, entity);
+					//BeanUtils.copyProperties(signUpDTO, entity);
+					entity.setPassword(passwordEncoder.encode(signUpDTO.getPassword()));
+					entity.setUserId(signUpDTO.getUserId());
+					entity.setEmail(signUpDTO.getEmail());
+					entity.setMobile(signUpDTO.getMobile());
 					boolean saved = this.repository.save(entity);
 					boolean sent = this.sendMail(signUpDTO.getEmail());
 					log.info("Saved in Entity-" + saved);
@@ -84,14 +92,25 @@ public class SignUpServiceImpl implements SignUpService {
 	
 	@Override
 	public SignUpDTO signIn(String userId, String password) {
-		SignUpEntity entity = this.repository.signIn(userId, password);
-				SignUpDTO dto = new SignUpDTO();
-		dto.setUserId(entity.getUserId());
-		dto.setPassword(entity.getPassword());
-		if (dto.getUserId().equals(userId) && dto.getPassword().equals(password)) {
-			return dto;
+		SignUpEntity entity = this.repository.signIn(userId);
+		SignUpDTO dto = new SignUpDTO();
+		BeanUtils.copyProperties(entity, dto);
+		log.info("Matching......" + passwordEncoder.matches(password, entity.getPassword()));
+	//	dto.setUserId(entity.getUserId());
+	//	dto.setPassword(entity.getPassword());
+		
+		if (entity.getLoginCount() >= 3) {
+			System.out.println("running Login account condition");
+			return null;
 		}
+		if (dto.getUserId().equals(userId) && passwordEncoder.matches(password, entity.getPassword())) {
+			return dto;
+			
+		}else {
+			this.repository.logincount(userId, entity.getLoginCount() + 1);
+			log.info("count of login" + entity.getLoginCount() + 1);
 		return null;
+		}
 	}
 	
 	@Override
