@@ -74,10 +74,52 @@
 			<li><a href="#">Contact</a></li>
 		</ul>
 	</nav>
-	<div class="container" style="text-align: center;">
-	<h1>Successfully Registered...</h1><br>
-	
-	<h2>UserId : ${dto.userId}</h2> <br>
-	<h2>Email : ${dto.email}</h2>
+	<nav class="navbar navbar-expand">
+		<div class="container-fluid">
+			<a href="SignUp.jsp">Sign Up</a>
+			 <a href="SignIn.jsp"><span
+				class="glyphicon glyphicon-log-in"></span>Login</a>
+		</div>
+	</nav>
+	<div align="center">
+		<form action="reset" method="post">
+			User Email <br>
+			<input type="email" name="email" id="emailId"
+				onchange="valideEmail()"> <br> <span id="display"
+				style="color: red"></span> <br>
+			<button type="submit" class="btn btn-primary">Reset</button>
+		</form>
+		<div>
+			<span style="color: orange;">${msg}</span>
+
+		</div>
+
+	</div>
+	<script>
+		function valideEmail() {
+			var userEmail = document.getElementById('emailId');
+			var userEmailvalue = userEmail.value;
+			console.log(userEmailvalue);
+			if (userEmailvalue != null && userEmailvalue != ""
+					&& userEmailvalue.length > 4 && userEmailvalue.length < 40) {
+				console.log('valide email');
+				const xhttp = new XMLHttpRequest();
+				console.log('Running in ajax');
+				console.log(userEmailvalue);
+				xhttp.open("GET",
+						"http://localhost:8080/sahana_xworkz_cm/reemail/"
+								+ userEmailvalue);
+				xhttp.send();
+				xhttp.onload = function() {
+					console.log(this);
+					document.getElementById("display").innerHTML = this.responseText
+				}
+				document.getElementById('emailError').innerHTML = '';
+			} else {
+				console.log('invalide email');
+				document.getElementById('emailError').innerHTML = 'Plese enter valide email min 4 and max 40 charactes ';
+			}
+		}
+	</script>
 </body>
 </html>

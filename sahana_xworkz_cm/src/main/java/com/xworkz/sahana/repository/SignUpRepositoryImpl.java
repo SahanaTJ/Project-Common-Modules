@@ -136,7 +136,53 @@ public class SignUpRepositoryImpl implements SignUpRepository{
 				em.close();
 			}
 		}
-  }
 	
+	@Override
+	public SignUpEntity reSetPassword(String email) {
+		EntityManager em = this.entityManagerFactory.createEntityManager();
+		try {
+			Query query = em.createNamedQuery("emailid");
+			query.setParameter("emailid", email);
+			Object object = query.getSingleResult();
+			SignUpEntity entity = (entity) object;
+			log.info("" + entity);
+			return entity;
+		} finally {
+			em.close();
+		}
+	}
+	
+	@Override
+	public boolean update(SignUpEntity entity) {
+		EntityManager em = this.entityManagerFactory.createEntityManager();
+		try {
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			em.merge(entity);
+			et.commit();
+			return true;
+		} finally {
+			em.close();
+		}
+	}
+	@Override
+	public boolean updatePassword(String userId, String password,Boolean resetPassword ) {
+		EntityManager em = this.entityManagerFactory.createEntityManager();
+		try {
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			Query query = em.createNamedQuery("updatePassword");
+			query.setParameter("uu", userId);
+			query.setParameter("up", password);
+			query.setParameter("urp", resetPassword);
+			query.executeUpdate();
+			et.commit();
+			return true;
+		} finally {
+			em.close();
+		}
+	}
+}
+  
 
 

@@ -68,4 +68,19 @@ public class SignUpController {
 		return "SignIn";
 			
 	}
+	
+	@PostMapping("/reset")
+	public String reSetPassword(String email,Model model) {
+		SignUpDTO udto = this.service.reSetPassword(email);
+		if(udto.getResetPassword()==true) {
+			model.addAttribute("msg","Password reset suceessfull plz login");
+			return "Resetpassword";
+		}
+		return "Resetpassword";
+	}
+	@PostMapping("/passwordUpdate")
+	public String upDatePassword(String userId, String password,String confirmPassword) {
+		this.service.updatePassword(userId, password, confirmPassword);
+		return "UpdateSucess";
+	}
 }

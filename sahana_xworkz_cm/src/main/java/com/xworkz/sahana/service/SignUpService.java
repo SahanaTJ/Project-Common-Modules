@@ -34,5 +34,12 @@ public interface SignUpService {
 
 	boolean sendMail(String email);
 
+	default SignUpDTO reSetPassword(String email) {
+		return null;
+	}
+	default SignUpDTO updatePassword(String userId, String password,String confirmPassword) {
+		return null;
+	}
+	
 	
 }

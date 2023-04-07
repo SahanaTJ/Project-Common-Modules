@@ -29,4 +29,10 @@ public interface SignUpRepository {
 
     boolean logincount(String userId, int count);
 
+    default SignUpEntity reSetPassword(String email) {
+		return null;
+	}
+	boolean update(SignUpEntity Entity);
+	
+	boolean updatePassword(String userId, String password,Boolean reSetPassword);
 }

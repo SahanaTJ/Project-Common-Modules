@@ -22,6 +22,7 @@ import lombok.Data;
 @NamedQuery(name = "mobileId",query = "select count(*) from  SignUpEntity ent where ent.mobile=:mobileBy")
 @NamedQuery(name = "userANDpassword",query = "select ent from SignUpEntity ent where ent.userId=:ui")
 @NamedQuery(name = "updateLoginCount",query = "update SignUpEntity ent set ent.loginCount=:count where ent.userId=:userId")
+@NamedQuery(name="updatePassword",query = "update SignUpEntity ent set ent.password=:up , ent.resetPassword=:urp where ent.userId=:uu")
 public class SignUpEntity extends AbstractAuditEntity{
 
 	@Id
@@ -55,4 +56,6 @@ public class SignUpEntity extends AbstractAuditEntity{
 	
 	@Column(name ="logincount")
 	private int loginCount;
+	
+	private Boolean resetPassword;
 }

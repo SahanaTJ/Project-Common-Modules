@@ -15,124 +15,157 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 	crossorigin="anonymous"></script>
-	
+<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+		
+		nav {
+			background-color: #333;
+			color: #fff;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10px;
+		}
+		
+		nav ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+		}
+		
+		nav ul li {
+			margin: 0 10px;
+		}
+		
+		nav ul li a {
+			color: #fff;
+			text-decoration: none;
+			padding: 5px 10px;
+		}
+		
+		nav ul li a:hover {
+			background-color: #555;
+			border-radius: 5px;
+		}
+		
+		nav img {
+			height: 50px;
+			padding: 5px;
+			margin-right: auto;
+		}
+	</style>
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg-navbar-Light bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"> <img
-				src=" https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
-				alt="" width="100" height="48" class="d-inline-block align text-top">
-				<a href="index.jsp">Home</a> <a class="navbar-brand" href="#">
-		</div>
-
+	<nav>
+		<img
+			src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
+			alt="Logo">
+		<ul>
+			<li><a href="index.jsp">Home</a></li>
+			<li><a href="SignUp.jsp">SignUp</a></li>
+			<li><a href="SignIn.jsp">SignIn</a></li>
+			<li><a href="AboutUs.jsp">About</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
 	</nav>
 	<h1 style="color: green;">${message}</h1>
-	<h5 style="color: red;">${messag}<br>
-		<c:forEach items="${errors}" var="e">${e.message}</c:forEach>
+	<h5 style="color: red;" align="center">
+		<c:forEach items="${errors}" var="e">
+			<br>${e.message}</c:forEach>
 	</h5>
-	
-	<form action="register" method="post"  class="container col-15 col-sm-8 col-md-5 shadow-lg p-6 mb-6 bg-white mx-auto d-block border border-primary rounded-lg 
-         m-7 pb-7 bg-info" >
-			<h1>Welcome To Sign Up</h1>
-			<table>
-				<tr>
 
-					<td>User ID</td>
+	<form action="register" method="post"
+		class="container col-15 col-sm-8 col-md-5 shadow-lg p-6 mb-6 bg-white mx-auto d-block 
+	                                               border border-primary rounded-lg m-7 pb-7 bg-info">
+		<h1>Welcome To Sign Up</h1>
+		<table>
+			<tr>
 
-					<td><input type="text" name="userId" id="userName"
-						onchange="ValideName()" class="form-outline mb-4"> <span id="nameError"
-						style="color: red"></span> <span id="displayUserName"
-						style="color: red"></span></td>
-				</tr>
+				<td>User ID</td>
 
-				<tr>
-					<td>Email</td>
-					<td><input class="form-outline mb-4" type="email" name="email" id="emailId"
-						onchange="valideEmail()"> <span id="emailError"
-						style="color: red"></span> <span id="display" style="color: red"></span></td>
-				</tr>
-				<tr>
-					<td>Mobile Number</td>
-					<td><input class="form-outline mb-4" type="number" name="mobile" id="userMobile"
-						onchange="ValideMobile()"> <span id="mobileError"
-						style="color: red"></span> <span id="displayUserMobile"
-						style="color: red"></span></td>
-				</tr>
-				
-				<tr>
-					<td>Password</td>
-					<td><input type="password" name="password" id="userPassword"
-						onblur="ValidePassword()"> <span id="passwordError"
-						style="color: red"></span> <input type="checkbox"
-						onclick="myFunction()">Show Password</td>
-				</tr>
-				
-				
-				<tr>
-					<td>Confirm Password</td>
-					<td><input class="form-outline mb-4" type="password" name="confirmPassword"
-						id="userConfirmPassword" onblur="ValidePassword()"> <span
-						id="passwordCompare" style="color: red"></span> <input
-						type="checkbox" onclick="myFunction2()">Show Confirm
-						Password</td> 
-				</tr>
-				
+				<td><input type="text" name="userId" id="userName"
+					onchange="ValideName()" class="form-outline mb-4"> <span
+					id="nameError" style="color: red"></span> <span
+					id="displayUserName" style="color: red"></span></td>
+			</tr>
 
-				<tr>
-					<td>Accept Agreement <input type="checkbox" name="agreement"
-						id="agreementConfirm" onclick="ValideName()"></td>
-				</tr>
-			</table>
-			<div>
-				<button type="submit" class="btn btn-primary">SignUp</button>
-			</div>
-			</div>
-			
+			<tr>
+				<td>Email</td>
+				<td><input class="form-outline mb-4" type="email" name="email"
+					id="emailId" onchange="valideEmail()"> <span
+					id="emailError" style="color: red"></span> <span id="display"
+					style="color: red"></span></td>
+			</tr>
+			<tr>
+				<td>Mobile Number</td>
+				<td><input class="form-outline mb-4" type="number"
+					name="mobile" id="userMobile" onchange="ValideMobile()"> <span
+					id="mobileError" style="color: red"></span> <span
+					id="displayUserMobile" style="color: red"></span></td>
+			</tr>
+
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="password" id="userPassword"
+					onblur="ValidePassword()"> <span id="passwordError"
+					style="color: red"></span> <input type="checkbox"
+					onclick="showPassword()">Show Password</td>
+			</tr>
+			<tr>
+				<td>Confirm Password</td>
+				<td><input class="form-outline mb-4" type="password"
+					name="confirmPassword" id="userConfirmPassword"
+					onblur="ValidePassword()"> <span id="passwordCompare"
+					style="color: red"></span></td>
+			</tr>
+			<tr>
+				<td>Accept Agreement <input type="checkbox" name="agreement"
+					id="agreementConfirm" onclick=""></td>
+			</tr>
+		</table>
+		<div>
+			<button type="submit" class="btn btn-primary" onclick=""
+				id="submitId">SignUp</button>
+		</div>
 	</form>
-	
+	</div>
+	</div>
+
+	</form>
+
 	<h4 style="color: red;">${password}</h4>
 
 	<script>
-		function DisplayDTO() {
-			console.log('Running in DisplayDTO');
-			const xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "http://localhost:8080/sahana_xworkz_cm/dto");
-			xhttp.send();
-			xhttp.onload = function() {
-				console.log(this);
-				document.getElementById("showDTO").innerHTML = this.responseText
-				var json = JSON.parse(this.responseText);
-				// document.getElementById("showDTO").innerHTML=json.email;
-
-			}
-		}
-		function myFunction() {
-			var x = document.getElementById("userPassword");
-			if (x.type === "password") {
-				x.type = "text";
+		function showPassword() {
+			var password = document.getElementById("userPassword");
+			if (password.type === "password") {
+				password.type = "text";
 			} else {
-				x.type = "password";
+				password.type = "password";
 			}
 		}
 
 		function ValideName() {
 			var user = document.getElementById('userName');
+			console.log(user);
 			var uservalue = user.value;
 			console.log(uservalue);
 			if (uservalue != null && uservalue != "" && uservalue.length > 3
 					&& uservalue.length < 30) {
-				console.log('valide name');
+				console.log('Name is valid');
 				var agree = document.getElementById('agreementConfirm');
 				console.log(agree.checked);
-				if (agree.checked) {
-					document.getElementById('submitId').disabled = false;
-				}
+
 				document.getElementById('nameError').innerHTML = '';
 			} else {
 				console.log('invalide name');
-				document.getElementById('submitId').disabled = 'disabled';
 				document.getElementById('nameError').innerHTML = 'Plese enter valide name min 4 and max 30 character';
 			}
 			const xhttp = new XMLHttpRequest();
@@ -221,7 +254,7 @@
 	</div>
 	</div>
 	</section>
-	
+
 </body>
 </html>
 
