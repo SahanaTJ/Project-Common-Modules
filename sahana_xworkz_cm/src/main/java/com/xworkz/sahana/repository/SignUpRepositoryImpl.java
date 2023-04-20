@@ -3,14 +3,13 @@ package com.xworkz.sahana.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.xworkz.sahana.entity.SignUpEntity;
 
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +66,7 @@ public class SignUpRepositoryImpl implements SignUpRepository{
 		} finally {
 			em.close();
 		}
-	}
+	}    
 
 	@Override
 	public Long findByEmail(String email) {
@@ -142,9 +141,9 @@ public class SignUpRepositoryImpl implements SignUpRepository{
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		try {
 			Query query = em.createNamedQuery("emailid");
-			query.setParameter("emailid", email);
+			query.setParameter("ei", email);
 			Object object = query.getSingleResult();
-			SignUpEntity entity = (entity) object;
+			SignUpEntity entity = (SignUpEntity) object;
 			log.info("" + entity);
 			return entity;
 		} finally {
@@ -153,12 +152,12 @@ public class SignUpRepositoryImpl implements SignUpRepository{
 	}
 	
 	@Override
-	public boolean update(SignUpEntity entity) {
+	public boolean update(SignUpEntity userEntity) {
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		try {
 			EntityTransaction et = em.getTransaction();
 			et.begin();
-			em.merge(entity);
+			em.merge(userEntity);
 			et.commit();
 			return true;
 		} finally {
@@ -172,9 +171,9 @@ public class SignUpRepositoryImpl implements SignUpRepository{
 			EntityTransaction et = em.getTransaction();
 			et.begin();
 			Query query = em.createNamedQuery("updatePassword");
-			query.setParameter("uu", userId);
-			query.setParameter("up", password);
-			query.setParameter("urp", resetPassword);
+			query.setParameter("byUserId", userId);
+			query.setParameter("byPassword", password);
+			query.setParameter("byResetPassword", resetPassword);
 			query.executeUpdate();
 			et.commit();
 			return true;
@@ -183,6 +182,3 @@ public class SignUpRepositoryImpl implements SignUpRepository{
 		}
 	}
 }
-  
-
-

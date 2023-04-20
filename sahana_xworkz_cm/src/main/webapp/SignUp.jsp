@@ -12,6 +12,7 @@
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
 <script
+
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 	crossorigin="anonymous"></script>
@@ -64,8 +65,9 @@
 
 	<nav>
 		<img
-			src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
-			alt="Logo">
+				src=" https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
+				alt="" width="110" height="88" class="d-inline-block align text-top">
+				<a class="navbar-brand" href="#"></a> 
 		<ul>
 			<li><a href="index.jsp">Home</a></li>
 			<li><a href="SignUp.jsp">SignUp</a></li>
@@ -83,7 +85,7 @@
 
 	<form action="register" method="post"
 		class="container col-15 col-sm-8 col-md-5 shadow-lg p-6 mb-6 bg-white mx-auto d-block 
-	                                               border border-primary rounded-lg m-7 pb-7 bg-info">
+	               border border-primary rounded-lg m-7 pb-7 bg-info">
 		<h1>Welcome To Sign Up</h1>
 		<table>
 			<tr>
@@ -108,7 +110,8 @@
 				<td><input class="form-outline mb-4" type="number"
 					name="mobile" id="userMobile" onchange="ValideMobile()"> <span
 					id="mobileError" style="color: red"></span> <span
-					id="displayUserMobile" style="color: red"></span></td>
+					id="displayUserMobile" style="color: red" ></span></td>
+					
 			</tr>
 
 			<tr>

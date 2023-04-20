@@ -32,7 +32,7 @@ public interface SignUpRepository {
     default SignUpEntity reSetPassword(String email) {
 		return null;
 	}
-	boolean update(SignUpEntity Entity);
+   boolean update(SignUpEntity Entity);
 	
-	boolean updatePassword(String userId, String password,Boolean reSetPassword);
+	boolean updatePassword(String userId, String password,Boolean resetPassword);
 }

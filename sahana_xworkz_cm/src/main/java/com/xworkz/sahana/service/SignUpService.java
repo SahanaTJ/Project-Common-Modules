@@ -10,7 +10,7 @@ import javax.validation.ConstraintViolation;
 import com.xworkz.sahana.dto.SignUpDTO;
 
 public interface SignUpService {
-	Set<ConstraintViolation<SignUpDTO>> validateAndSave(SignUpDTO signUpDTO);
+	Set<ConstraintViolation<SignUpDTO>> validateAndSave(SignUpDTO dto);
 
 	default SignUpDTO signIn(String userId, String password) {
 		return null;
@@ -32,14 +32,17 @@ public interface SignUpService {
 		return null;
 	}
 
-	boolean sendMail(String email);
-
 	default SignUpDTO reSetPassword(String email) {
 		return null;
 	}
 	default SignUpDTO updatePassword(String userId, String password,String confirmPassword) {
 		return null;
 	}
+	default SignUpDTO updateProfile(String userId,String email,Long mobile,String path) {
+		return null;
+	}
 	
-	
+	boolean sendMail(String email);
 }
+	
+	

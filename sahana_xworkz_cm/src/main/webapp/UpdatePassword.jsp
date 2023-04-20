@@ -62,8 +62,9 @@
 <body>
 	<nav>
 		<img
-			src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
-			alt="Logo">
+				src=" https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
+				alt="" width="110" height="88" class="d-inline-block align text-top">
+				<a class="navbar-brand" href="#"></a> 
 		<ul>
 			<li><a href="index.jsp">Home</a></li>
 			<li><a href="SignUp.jsp">SignUp</a></li>

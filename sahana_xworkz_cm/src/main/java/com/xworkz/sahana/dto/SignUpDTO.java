@@ -1,5 +1,7 @@
 package com.xworkz.sahana.dto;
 
+import java.time.LocalTime;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,6 +28,9 @@ public class SignUpDTO {
 	
 	private Boolean reSetPassword;
 	
+	private Integer loginCount;
 	
+	private LocalTime passwordChangedTime;
 
+	private String picName;
 }

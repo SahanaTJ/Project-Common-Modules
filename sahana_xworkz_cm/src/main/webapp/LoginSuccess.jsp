@@ -58,13 +58,15 @@
 			padding: 5px;
 			margin-right: auto;
 		}
+		
 	</style>
 </head>
 <body>
 	<nav>
 		<img
-			src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
-			alt="Logo">
+				src=" https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
+				alt="" width="110" height="88" class="d-inline-block align text-top">
+				<a class="navbar-brand" href="#"></a> 
 		<ul>
 			<li><a href="index.jsp">Home</a></li>
 			<li><a href="SignUp.jsp">SignUp</a></li>
@@ -72,12 +74,22 @@
 			<li><a href="AboutUs.jsp">About</a></li>
 			<li><a href="#">Services</a></li>
 			<li><a href="#">Contact</a></li>
+			
 		</ul>
+		
+		<span style="color:white;">welcome:${userId}</span>
+			<img src="download?fileName=${dtoPic}" height="50" width="80">
+			
 	</nav>
+	
 		<div align="center">
 	<h3>User Name:${userId}</h3>
-	</div>
+	
 	
 <h1 style="color: green;">Login Successfully....</h1>
+<a href="ProfileUpdate.jsp">Update profile</a><br>
+<a href="add.jsp">add</a><br>
+Search<input type="search">
+</div>
 </body>
 </html>
