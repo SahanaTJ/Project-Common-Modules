@@ -1,16 +1,12 @@
 package com.xworkz.sahana.configuration;
 
 import java.io.File;
-
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
-
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import lombok.extern.slf4j.Slf4j;
-
 
 @Slf4j
 public class SignUpInit extends AbstractAnnotationConfigDispatcherServletInitializer implements WebMvcConfigurer {
@@ -43,7 +39,6 @@ public class SignUpInit extends AbstractAnnotationConfigDispatcherServletInitial
 		configurer.enable();// we enable this to handle the static sources
 	} // static = .jsp,html,css
 
-	
 	protected void customizeRegistration(Dynamic registration) {
 		String tempDir = "D:\\temp";
 		int maxUploadSizeInMb = 20 * 1024 * 1024;
@@ -52,7 +47,4 @@ public class SignUpInit extends AbstractAnnotationConfigDispatcherServletInitial
 				maxUploadSizeInMb, maxUploadSizeInMb * 2, maxUploadSizeInMb / 2);
 		registration.setMultipartConfig(multipartConfigElement);
 	}
-
 }
-		
-

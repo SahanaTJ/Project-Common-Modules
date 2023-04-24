@@ -25,7 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.xworkz.sahana.dto.SignUpDTO;
+import com.xworkz.sahana.dto.TechnologyListDTO;
 import com.xworkz.sahana.entity.SignUpEntity;
+import com.xworkz.sahana.entity.TechnologyListEntity;
 import com.xworkz.sahana.repository.SignUpRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -100,7 +102,7 @@ public class SignUpServiceImpl implements SignUpService {
 	@Override
 	public SignUpDTO signIn(String userId, String password) {
 		SignUpEntity entity = this.repository.signIn(userId);
-		log.info("find by userId: "+entity);
+		log.info("find by userId: " + entity);
 		SignUpDTO dto = new SignUpDTO();
 		BeanUtils.copyProperties(entity, dto);
 		log.info("Matching......" + passwordEncoder.matches(password, entity.getPassword()));
@@ -111,7 +113,7 @@ public class SignUpServiceImpl implements SignUpService {
 			System.out.println("running Login account condition");
 			return dto;
 		}
-		
+
 		if (dto.getUserId().equals(userId) && passwordEncoder.matches(password, entity.getPassword())) {
 			log.info("Running userId & password matching" + dto);
 			return dto;
@@ -135,6 +137,8 @@ public class SignUpServiceImpl implements SignUpService {
 		return lists;
 	}
 
+
+
 	@Override
 	public Long findByEmail(String email) {
 		Long emailcount = this.repository.findByEmail(email);
@@ -155,6 +159,17 @@ public class SignUpServiceImpl implements SignUpService {
 	}
 
 	@Override
+	public SignUpDTO findById(int id) {
+		log.info("findById "+id);
+		SignUpEntity entity = repository.findById(id);
+		if (entity != null) {
+			SignUpDTO dto = new SignUpDTO();
+			BeanUtils.copyProperties(entity, dto);
+			return dto;
+		}
+		return SignUpService.super.findById(id);
+	}
+	@Override
 	public SignUpDTO reSetPassword(String email) {
 		// String reSetPassword = DefaultPasswordGenerator.generate(6);
 		log.info("ReSetd password--" + reSetPassword);
@@ -168,7 +183,7 @@ public class SignUpServiceImpl implements SignUpService {
 			boolean update = this.repository.update(entity);
 			if (update) {
 				boolean sendMail = sendMail(entity.getEmail());
-				log.info("sendMail : "+ sendMail);
+				log.info("sendMail : " + sendMail);
 			}
 			log.info("Updated---" + update);
 			SignUpDTO updatedDto = new SignUpDTO();
@@ -202,6 +217,45 @@ public class SignUpServiceImpl implements SignUpService {
 		log.info("updated--" + updated);
 		return SignUpService.super.updateProfile(userId, email, mobile, path);
 	}
+	
+	@Override
+	public Set<ConstraintViolation<TechnologyListDTO>> validateAndAdd(TechnologyListDTO dto) {
+		log.info("validateAndAdd in TechnologyServiceImpl");
+
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator = factory.getValidator();
+		Set<ConstraintViolation<TechnologyListDTO>> violations = validator.validate(dto);
+		if (violations != null && !violations.isEmpty()) {
+			log.info("Violations in dto" + dto);
+			return violations;
+		}
+		TechnologyListEntity entity = new TechnologyListEntity();
+		BeanUtils.copyProperties(dto, entity);
+		boolean add = this.repository.add(entity);
+		if (add) {
+			log.info("Technology added successfully");
+		}
+		return Collections.emptySet();
+	}
+
+	
+	@Override
+	public List<TechnologyListDTO> findlistById(int id) {
+		log.info("findById " + id);
+		List<TechnologyListEntity> entities = this.repository.listById(id);
+		log.info("entities.size() : " + entities.size());
+		List<TechnologyListDTO> dtos = new ArrayList<>();
+		if (!entities.isEmpty()) {
+			for (TechnologyListEntity entity : entities) {
+				TechnologyListDTO dto = new TechnologyListDTO();
+				BeanUtils.copyProperties(entity, dto);
+				dtos.add(dto);
+			}
+			log.info("dtos.size() : " + dtos.size());
+			return dtos;
+		}
+		return Collections.emptyList();
+	}
 
 	@Override
 	public boolean sendMail(String email) {
@@ -233,7 +287,7 @@ public class SignUpServiceImpl implements SignUpService {
 			message.setText("Thanks for registration");
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			Transport.send(message);
-			log.info("Mail sent sucessfully");
+			log.info("Mail sent successfully");
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

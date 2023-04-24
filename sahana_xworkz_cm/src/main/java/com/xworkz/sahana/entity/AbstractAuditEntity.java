@@ -10,17 +10,17 @@ import lombok.Data;
 
 @MappedSuperclass
 @Data
-public class AbstractAuditEntity implements Serializable{
+public class AbstractAuditEntity implements Serializable {
 
-	@Column(name ="createdBy")
+	@Column(name = "createdBy")
 	private String createdBy;
-	
+
 	@Column(name = "createdDate")
 	private LocalDateTime createdDate;
-	
-	@Column(name ="updatedBy")
+
+	@Column(name = "updatedBy")
 	private String updatedBy;
-	
-	@Column(name ="updatedDate")
+
+	@Column(name = "updatedDate")
 	private LocalDateTime updatedDate;
 }

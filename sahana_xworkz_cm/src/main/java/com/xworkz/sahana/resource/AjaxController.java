@@ -19,11 +19,11 @@ public class AjaxController {
 
 	@Autowired
 	private SignUpService service;
-	
+
 	public AjaxController() {
 		log.info("Created" + this.getClass().getSimpleName());
 	}
-	
+
 	@GetMapping(value = "/userName/{user}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String onUser(@PathVariable String user) {
 		Long dbUser = this.service.findByUser(user);
@@ -37,20 +37,20 @@ public class AjaxController {
 			return "UserID exsist try another way";
 		}
 	}
-	
+
 	@GetMapping(value = "/email/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
-	  public String onEmail(@PathVariable String  email) {
+	public String onEmail(@PathVariable String email) {
 		Long dbEmail = this.service.findByEmail(email);
 		System.err.println(dbEmail);
-		
+
 		if (dbEmail == 0) {
 			System.err.println("Running in equals condition");
 			return "";
-		}else {
+		} else {
 			return "Email id exsist";
 		}
 	}
-	
+
 	@GetMapping(value = "/mobile/{number}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String onMobile(@PathVariable Long number) {
 		Long dbNumber = this.service.findByMobile(number);
@@ -64,6 +64,7 @@ public class AjaxController {
 			return "Mobile Number exsist";
 		}
 	}
+
 	@GetMapping(value = "/reemail/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String reEmail(@PathVariable String email) {
 		Long dbEmail = this.service.findByEmail(email);
@@ -76,7 +77,6 @@ public class AjaxController {
 			return "";
 		}
 	}
-	
 
 //	@GetMapping(value = "/dto", produces = MediaType.APPLICATION_JSON_VALUE)
 //	public SignUpDTO signUpDTO() {

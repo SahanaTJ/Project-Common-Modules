@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @ComponentScan("com.xworkz.sahana")
 @Slf4j
+@EnableWebMvc
 public class SignUpConfiguration {
 
 	public SignUpConfiguration() {
@@ -42,7 +44,7 @@ public class SignUpConfiguration {
 	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {
 		log.info("registering LocalContainerEntityManagerFactoryBean");
 		LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
-		bean.setPackagesToScan("com.xworkz.sahana");
+		bean.setPackagesToScan("com.xworkz.sahana.entity");
 		bean.setDataSource(dataSource());
 		bean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		return bean;

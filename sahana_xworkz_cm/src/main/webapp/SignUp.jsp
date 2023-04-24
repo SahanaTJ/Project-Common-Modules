@@ -92,7 +92,7 @@
 
 				<td>User ID</td>
 
-				<td><input type="text" name="userId" id="userName"
+				<td><input type="text" name="userId" 
 					onchange="ValideName()" class="form-outline mb-4"> <span
 					id="nameError" style="color: red"></span> <span
 					id="displayUserName" style="color: red"></span></td>

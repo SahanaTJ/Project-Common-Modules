@@ -10,8 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xworkz.sahana.dto.SignUpDTO;
+import com.xworkz.sahana.dto.TechnologyListDTO;
 import com.xworkz.sahana.service.SignUpService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -72,6 +73,7 @@ public class SignUpController {
 		try {
 			SignUpDTO dto = this.service.signIn(userId, password);
 			log.info("signIn : " + dto);
+			model.addAttribute("dto", dto);
 			if (dto.getLoginCount() >= 3) {
 				model.addAttribute("msg", "Account locked Reset password");
 				log.info("Account locked due to wrong password entering 3 times");
@@ -162,6 +164,51 @@ public class SignUpController {
 		ServletOutputStream out = response.getOutputStream();
 		IOUtils.copy(in, out);
 		response.flushBuffer();
-
 	}
+
+	@GetMapping("/addtechnology")
+	public String addTechnology(Integer id, Model model) {
+		log.info("@getmapping addTechnology ,id " +id);
+		SignUpDTO dto = this.service.findById(id);
+		log.info("dto : " + dto);
+		model.addAttribute("getUserId",dto.getUserId());
+		model.addAttribute("id", id);
+		return "AddTechnology";
+	}
+
+	@PostMapping("/addtechnology")
+	public String addTechnology(TechnologyListDTO dto, Integer id, Model model) {
+		log.info("@PostMapping(/addtechnology) TechnologyListDTO dto = " + dto +"  ID : "+id);
+		dto.setId(id);
+	//	SignUpDTO dto = this.service.findById(id);
+		model.addAttribute("dto", dto);
+		model.addAttribute("id", id);
+		Set<ConstraintViolation<TechnologyListDTO>> violations = this.service.validateAndAdd(dto);
+		if (violations.isEmpty()) {
+			log.info("There is violations can add a technology");
+			model.addAttribute("addTechSuccess", "Successfully added the technology : " + dto.getName());
+			return "AddTechnology";
+		}
+		log.info("Violations in the technology, can't add it");
+		model.addAttribute("error", violations);
+		return "AddTechnology";
+	}
+
+	@PostMapping("/listtechnology")
+	public String listTechnology(Integer id, Model model) {
+		log.info("listTechnology " + id);
+		SignUpDTO dto = this.service.findById(id);
+		model.addAttribute("dto", dto);
+		model.addAttribute("id", id);
+		List<TechnologyListDTO> dtos = this.service.findlistById(id);
+		if (dtos.isEmpty()) {
+			log.info("There is no technologies added");
+			model.addAttribute("emptyTechnologies", "There is no technologies added");
+			return "LoginSuccess";
+		}
+		log.info("dtos.size()" + dtos.size());
+		model.addAttribute("dtos", dtos);
+		return "TechnologiesList";
+	}
+
 }

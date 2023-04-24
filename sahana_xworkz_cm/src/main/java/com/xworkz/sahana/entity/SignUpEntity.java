@@ -2,6 +2,7 @@ package com.xworkz.sahana.entity;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ import lombok.Data;
 @NamedQuery(name = "userId",query = "select count(*) from  SignUpEntity ent where ent.userId=:userBy")
 @NamedQuery(name = "emailId",query = "select count(*) from  SignUpEntity ent where ent.email=:emailBy")
 @NamedQuery(name = "mobileId",query = "select count(*) from  SignUpEntity ent where ent.mobile=:mobileBy")
+@NamedQuery(name = "findById", query = "select entity from SignUpEntity entity where entity.id =:byId")
 @NamedQuery(name = "userANDpassword",query = "select ent from SignUpEntity ent where ent.userId=:ui")
 @NamedQuery(name = "updateLoginCount",query = "update SignUpEntity ent set ent.loginCount=:count where ent.userId=:userId")
 @NamedQuery(name="updatePassword", query = "update SignUpEntity ent set ent.password=:byPassword , ent.reSetPassword=:byResetPassword where ent.userId=:byUserId")
