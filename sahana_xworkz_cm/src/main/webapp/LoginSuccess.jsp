@@ -68,8 +68,9 @@ nav img {
 		<a class="navbar-brand" href="#"></a>
 		<ul>
 			<li><a href="index.jsp">Home</a></li>
-			<li><a href="SignUp.jsp">SignUp</a></li>
-			<li><a href="SignIn.jsp">SignIn</a></li>
+			<li><a href="ProfileUpdate.jsp">Update Profile</a></li>
+			<li><a href="addtechnology?id=${dto.id}">Add Technology</a></li>
+			<li><a href="listtechnology?id=${dto.id}">List Technologies</a>
 			<li><a href="AboutUs.jsp">About</a></li>
 			<li><a href="#">Services</a></li>
 			<li><a href="#">Contact</a></li>
@@ -88,11 +89,7 @@ nav img {
 
 		<h1 style="color: green;">Login Successfully....</h1>
 		<h3 style="color: orange;">${emptyTechnologies}</h3>
-		<a href="ProfileUpdate.jsp">Update profile</a><br> <a
-			href="addtechnology?id=${dto.id}">Add Technology</a>
-		<form action="listtechnology?id=${dto.id}" method="post">
-			List Technology(s) : <input type="submit" value="List Technologies" />
-		</form>
+		
 	</div>
 <script type="text/javascript">
 	console.log("id: "${dto.id});

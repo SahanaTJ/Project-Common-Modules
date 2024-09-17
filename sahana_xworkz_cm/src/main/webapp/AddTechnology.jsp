@@ -91,6 +91,7 @@ footer {
 				<li><a href="index.jsp">Home</a></li>
 				<li><a href="SignUp.jsp">SignUp</a></li>
 				<li><a href="SignIn">SignIn</a></li>
+				<li><a href="listtechnology?id=${dto.id}">List Technologies</a>
 				<li><a href="AboutUs.jsp">About Us</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact Us</a></li>
@@ -131,7 +132,7 @@ footer {
 					<br>
 					<td>Owner</td>
 
-					<td><input type="text" name="owner" id="owner"
+					<td><input type="text" name="owner" id="owne+r"
 						class="form-outline mb-4"></td>
 					</tr>
 					<br>
@@ -141,7 +142,7 @@ footer {
 						class="form-outline mb-4"></td>
 					</tr>
 					<br>
-					<td>Support to</td>
+					<td>Support To</td>
 
 					<td><input type="text" name="supportTo" id="supportTo"
 						class="form-outline mb-4"></td>
@@ -190,7 +191,8 @@ footer {
 		var pic = localStorage.getItem("pic");
 		console.log("localStorage : " + pic);
 		if (pic == null) {
-			var profilePicUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+			var profilePicUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37
+			/blank-profile-picture-973460_1280.png";
 			document.getElementById("profilePic").src = profilePicUrl;
 		}
 

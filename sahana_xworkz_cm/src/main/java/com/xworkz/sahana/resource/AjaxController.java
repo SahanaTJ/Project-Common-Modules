@@ -20,6 +20,7 @@ public class AjaxController {
 	@Autowired
 	private SignUpService service;
 
+	
 	public AjaxController() {
 		log.info("Created" + this.getClass().getSimpleName());
 	}

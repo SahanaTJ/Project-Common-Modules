@@ -86,7 +86,9 @@
 	<form action="register" method="post"
 		class="container col-15 col-sm-8 col-md-5 shadow-lg p-6 mb-6 bg-white mx-auto d-block 
 	               border border-primary rounded-lg m-7 pb-7 bg-info">
-		<h1>Welcome To Sign Up</h1>
+		<h1>User Registration Form</h1><br>
+		
+		<h6>Enter Your SignUp Details:</h6>
 		<table>
 			<tr>
 

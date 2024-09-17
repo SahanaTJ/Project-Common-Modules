@@ -1,7 +1,6 @@
 package com.xworkz.sahana.dto;
 
 import javax.validation.constraints.NotNull;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class TechnologyListDTO {
 
 	private Long stockId;
-	
+
 	private int id;
 
 	@NotNull(message = "Name can't be null")

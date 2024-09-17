@@ -73,6 +73,7 @@ nav img {
 			<li><a href="AboutUs.jsp">About</a></li>
 			<li><a href="#">Services</a></li>
 			<li><a href="#">Contact</a></li>
+			<li><a class="userId">Welcome, ${dto.userId}</a></li>
 		</ul>
 	</nav>
 

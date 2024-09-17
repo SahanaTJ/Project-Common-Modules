@@ -3,7 +3,6 @@ package com.xworkz.sahana.entity;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.NamedQuery;
-
 import lombok.Data;
 
 @Data
@@ -64,7 +62,7 @@ public class SignUpEntity extends AbstractAuditEntity{
 	private Boolean reSetPassword;
 	
 	private LocalTime passwordChangedTime;
-	
+
 	private String picName;
 
 }

@@ -168,19 +168,19 @@ public class SignUpController {
 
 	@GetMapping("/addtechnology")
 	public String addTechnology(Integer id, Model model) {
-		log.info("@getmapping addTechnology ,id " +id);
+		log.info("@getmapping addTechnology ,id " + id);
 		SignUpDTO dto = this.service.findById(id);
 		log.info("dto : " + dto);
-		model.addAttribute("getUserId",dto.getUserId());
+		model.addAttribute("getUserId", dto.getUserId());
 		model.addAttribute("id", id);
 		return "AddTechnology";
 	}
 
 	@PostMapping("/addtechnology")
 	public String addTechnology(TechnologyListDTO dto, Integer id, Model model) {
-		log.info("@PostMapping(/addtechnology) TechnologyListDTO dto = " + dto +"  ID : "+id);
+		log.info("@PostMapping(/addtechnology) TechnologyListDTO dto = " + dto + "  ID : " + id);
 		dto.setId(id);
-	//	SignUpDTO dto = this.service.findById(id);
+		// SignUpDTO dto = this.service.findById(id);
 		model.addAttribute("dto", dto);
 		model.addAttribute("id", id);
 		Set<ConstraintViolation<TechnologyListDTO>> violations = this.service.validateAndAdd(dto);
@@ -194,7 +194,7 @@ public class SignUpController {
 		return "AddTechnology";
 	}
 
-	@PostMapping("/listtechnology")
+	@GetMapping("/listtechnology")
 	public String listTechnology(Integer id, Model model) {
 		log.info("listTechnology " + id);
 		SignUpDTO dto = this.service.findById(id);

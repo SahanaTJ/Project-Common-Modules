@@ -38,7 +38,7 @@ public interface SignUpRepository {
 	
 	
 	boolean logincount(String userId, int count);
-
+																																																								
 	default SignUpEntity reSetPassword(String email) {
 		return null;
 	}
